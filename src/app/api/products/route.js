@@ -1,4 +1,4 @@
-User
+
 import { NextResponse } from 'next/server';
 
 import Product from '@/models/prouduct'; // Import the Product model
