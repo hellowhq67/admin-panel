@@ -1,29 +1,24 @@
+User
 import { NextResponse } from 'next/server';
+
 import Product from '@/models/prouduct'; // Import the Product model
 import connectMongoDB from '@/db/db';
-
 export async function GET() {
   try {
     await connectMongoDB(); // Connect to your MongoDB database
+
     const products = await Product.find({}); // Retrieve all products from the database
 
-    // Set CORS headers
-    const headers = {
-      'Access-Control-Allow-Origin': 'https://admin-panel-rho-liart.vercel.app/',
-      'Access-Control-Allow-Methods': 'GET, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type'
-    };
-
-    return new NextResponse.json({ products }, { headers }); // Return the products as JSON response with CORS headers
+    return NextResponse.json({ products }); // Return the products as JSON response
   } catch (error) {
     console.error("Error fetching products:", error);
     return NextResponse.error(error); // Return an error response if there's an error
   }
 }
-
 export async function POST(request) {
   try {
     await connectMongoDB();
+
     const {
       userId,
       userName,
@@ -72,16 +67,9 @@ export async function POST(request) {
       tag
     });
 
-    // Set CORS headers
-    const headers = {
-      'Access-Control-Allow-Origin': 'https://admin-panel-rho-liart.vercel.app/',
-      'Access-Control-Allow-Methods': 'POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type'
-    };
-
-    return new NextResponse.json({ message: "Product Created", product: newProduct }, { headers, status: 201 });
+    return NextResponse.json({ message: "Product Created", product: newProduct }, { status: 201 });
   } catch (error) {
     console.error("Error creating product:", error);
     return NextResponse.error(error);
   }
-}
+} 
