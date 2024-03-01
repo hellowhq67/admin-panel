@@ -1,11 +1,11 @@
-import LoginPage from '@/components/login/LoginPage'
+import BlogForm from '@/components/Forms/blogFormPage/BlogForm'
 import React from 'react'
 
 export default function page() {
   return (
     <div>
-      <LoginPage />
-
+      <BlogForm/>
+      
     </div>
   )
 }
